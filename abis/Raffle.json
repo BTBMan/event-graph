@@ -1,0 +1,310 @@
+[
+  {
+    "type": "constructor",
+    "inputs": [
+      {
+        "name": "vrfCoordinator",
+        "type": "address",
+        "internalType": "address"
+      },
+      { "name": "entranceFee", "type": "uint256", "internalType": "uint256" },
+      { "name": "keyHash", "type": "bytes32", "internalType": "bytes32" },
+      {
+        "name": "subscriptionId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "callbackGasLimit",
+        "type": "uint32",
+        "internalType": "uint32"
+      },
+      { "name": "enableNativePayment", "type": "bool", "internalType": "bool" },
+      { "name": "interval", "type": "uint256", "internalType": "uint256" }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "name": "OnlyCoordinatorCanFulfill",
+    "type": "error",
+    "inputs": [
+      { "name": "have", "type": "address", "internalType": "address" },
+      { "name": "want", "type": "address", "internalType": "address" }
+    ]
+  },
+  {
+    "name": "OnlyOwnerOrCoordinator",
+    "type": "error",
+    "inputs": [
+      { "name": "have", "type": "address", "internalType": "address" },
+      { "name": "owner", "type": "address", "internalType": "address" },
+      { "name": "coordinator", "type": "address", "internalType": "address" }
+    ]
+  },
+  { "name": "Raffle__NotEnoughETHEntered", "type": "error", "inputs": [] },
+  { "name": "Raffle__NotOpen", "type": "error", "inputs": [] },
+  { "name": "Raffle__TransferFailed", "type": "error", "inputs": [] },
+  {
+    "name": "Raffle__UpkeepNotNeeded",
+    "type": "error",
+    "inputs": [
+      {
+        "name": "currentBalance",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      { "name": "numPlayers", "type": "uint256", "internalType": "uint256" },
+      { "name": "raffleState", "type": "uint256", "internalType": "uint256" }
+    ]
+  },
+  { "name": "ZeroAddress", "type": "error", "inputs": [] },
+  {
+    "name": "CoordinatorSet",
+    "type": "event",
+    "inputs": [
+      {
+        "name": "vrfCoordinator",
+        "type": "address",
+        "indexed": false,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "name": "OwnershipTransferRequested",
+    "type": "event",
+    "inputs": [
+      {
+        "name": "from",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "to",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "name": "OwnershipTransferred",
+    "type": "event",
+    "inputs": [
+      {
+        "name": "from",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "to",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "name": "RaffleEnter",
+    "type": "event",
+    "inputs": [
+      {
+        "name": "player",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "name": "RequestedRaffleWinner",
+    "type": "event",
+    "inputs": [
+      {
+        "name": "requestId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "name": "WinnerPicked",
+    "type": "event",
+    "inputs": [
+      {
+        "name": "winner",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "name": "acceptOwnership",
+    "type": "function",
+    "inputs": [],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "name": "checkUpkeep",
+    "type": "function",
+    "inputs": [{ "name": "", "type": "bytes", "internalType": "bytes" }],
+    "outputs": [
+      { "name": "upkeepNeeded", "type": "bool", "internalType": "bool" },
+      { "name": "", "type": "bytes", "internalType": "bytes" }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "name": "enterRaffle",
+    "type": "function",
+    "inputs": [],
+    "outputs": [],
+    "stateMutability": "payable"
+  },
+  {
+    "name": "getEntranceFee",
+    "type": "function",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "stateMutability": "view"
+  },
+  {
+    "name": "getInterval",
+    "type": "function",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "stateMutability": "view"
+  },
+  {
+    "name": "getLatestTimeStamp",
+    "type": "function",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "stateMutability": "view"
+  },
+  {
+    "name": "getNumWords",
+    "type": "function",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "stateMutability": "pure"
+  },
+  {
+    "name": "getNumberOfPlayers",
+    "type": "function",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "stateMutability": "view"
+  },
+  {
+    "name": "getPlayer",
+    "type": "function",
+    "inputs": [
+      { "name": "index", "type": "uint256", "internalType": "uint256" }
+    ],
+    "outputs": [{ "name": "", "type": "address", "internalType": "address" }],
+    "stateMutability": "view"
+  },
+  {
+    "name": "getRaffleState",
+    "type": "function",
+    "inputs": [],
+    "outputs": [
+      { "name": "", "type": "uint8", "internalType": "enum Raffle.RaffleState" }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "name": "getRecentWinner",
+    "type": "function",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address", "internalType": "address" }],
+    "stateMutability": "view"
+  },
+  {
+    "name": "getRequestConfirmations",
+    "type": "function",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "stateMutability": "pure"
+  },
+  {
+    "name": "getSubscriptionId",
+    "type": "function",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "stateMutability": "view"
+  },
+  {
+    "name": "owner",
+    "type": "function",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address", "internalType": "address" }],
+    "stateMutability": "view"
+  },
+  {
+    "name": "performUpkeep",
+    "type": "function",
+    "inputs": [{ "name": "", "type": "bytes", "internalType": "bytes" }],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "name": "rawFulfillRandomWords",
+    "type": "function",
+    "inputs": [
+      { "name": "requestId", "type": "uint256", "internalType": "uint256" },
+      {
+        "name": "randomWords",
+        "type": "uint256[]",
+        "internalType": "uint256[]"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "name": "s_vrfCoordinator",
+    "type": "function",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "contract IVRFCoordinatorV2Plus"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "name": "setCoordinator",
+    "type": "function",
+    "inputs": [
+      {
+        "name": "_vrfCoordinator",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "name": "transferOwnership",
+    "type": "function",
+    "inputs": [{ "name": "to", "type": "address", "internalType": "address" }],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  }
+]
