@@ -6,6 +6,7 @@ const ABI = parseAbi([
   'event Transfer(address indexed from, address indexed to, uint value)',
 ]);
 
+// @ts-ignore
 const getEvents = async () => {
   const block = await client.getBlockNumber();
 
@@ -24,6 +25,7 @@ const getEvents = async () => {
   });
 };
 
+// @ts-ignore
 const main = async () => {
   await getEvents();
 };
