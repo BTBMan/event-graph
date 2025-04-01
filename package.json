@@ -1,6 +1,10 @@
 {
-  "name": "lottery-raffle-test",
-  "license": "UNLICENSED",
+  "name": "event-graph",
+  "license": "MIT",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "",
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
@@ -12,7 +16,10 @@
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.96.0",
-    "@graphprotocol/graph-ts": "0.37.0"
+    "@graphprotocol/graph-ts": "0.37.0",
+    "viem": "^2.24.3"
   },
-  "devDependencies": { "matchstick-as": "0.6.0" }
+  "devDependencies": {
+    "matchstick-as": "0.6.0"
+  }
 }
